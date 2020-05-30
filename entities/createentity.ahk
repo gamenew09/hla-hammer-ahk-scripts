@@ -1,5 +1,9 @@
+; Make sure that we are working relative to our script and not to the running script
+
 SetWorkingDir, %A_ScriptDir%
 #Include %A_ScriptDir%
+
+; Include utility functions (PasteText)
 #Include ../utils.ahk
 
 ; Make sure all functions in here can use the Hammer Window Position & Size variables.
@@ -8,7 +12,8 @@ global Hammer_Y
 global Hammer_W
 global Hammer_H
 
-ClickEntityClassText()
+; Finds the text that says "Entity Class:" and clicks the combo box next to the text.
+ClickEntityClassComboBox()
 {
     ; Search for the "Entity Class:" text that is present in the entity tool window.
     ImageSearch, entclasstextx, entclasstexty, 0, 0, Hammer_W, Hammer_H, *2 ../assets/createentity/ent_class_text.png
@@ -73,7 +78,7 @@ CreateEntityAtMousePos(entName)
             Sleep, 100
 
             ; Click the entity class combo box.
-            ClickEntityClassText()
+            ClickEntityClassComboBox()
 
             ; Make sure we actually found and clicked the box.
             if(ErrorLevel = 0)
